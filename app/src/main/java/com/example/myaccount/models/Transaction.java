@@ -3,7 +3,9 @@ package com.example.myaccount.models;
 
 import com.example.myaccount.R;
 
-public class Transaction {
+import java.io.Serializable;
+
+public class Transaction implements Serializable {
     private final int imageIdIcon;
     private final int type;
     private String title;

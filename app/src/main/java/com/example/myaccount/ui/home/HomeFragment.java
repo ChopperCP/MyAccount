@@ -1,6 +1,7 @@
 package com.example.myaccount.ui.home;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,6 +35,7 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
+    private View rootView;
 
     private List<Transaction> transactions;
     private DataLoader dataLoader;
@@ -45,32 +48,32 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        this.rootView=root;
 
 
         initdata();
         RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        this.adapter=new TransactionRecyclerViewAdapter(transactions);
+        this.adapter = new TransactionRecyclerViewAdapter(transactions);
         recyclerView.setAdapter(adapter);
 
 //        Calculate the net asset, total income, and total expense
-        TextView netAssetView=root.findViewById(R.id.net_asset_view);
+        TextView netAssetView = root.findViewById(R.id.net_asset_view);
         TextView totalIncomeView = root.findViewById(R.id.total_income_view);
         TextView totalExpenseView = root.findViewById(R.id.total_expense_view);
 
-        Double totalIncome=0.0;
-        Double totalExpense=0.0;
-        Double netAsset=0.0;
-        for (Transaction transaction:transactions){
-            if (transaction.getType()==Transaction.Type.TYPE_INCOME){
-                totalIncome+=transaction.getAmount();
-            }
-            else if (transaction.getType()==Transaction.Type.TYPE_EXPENSE){
-                totalExpense+=transaction.getAmount();
+        Double totalIncome = 0.0;
+        Double totalExpense = 0.0;
+        Double netAsset = 0.0;
+        for (Transaction transaction : transactions) {
+            if (transaction.getType() == Transaction.Type.TYPE_INCOME) {
+                totalIncome += transaction.getAmount();
+            } else if (transaction.getType() == Transaction.Type.TYPE_EXPENSE) {
+                totalExpense += transaction.getAmount();
             }
         }
-        netAsset=totalIncome-totalExpense;
+        netAsset = totalIncome - totalExpense;
 
         totalIncomeView.setText(String.valueOf(totalIncome));
         totalExpenseView.setText(String.valueOf(totalExpense));
@@ -81,37 +84,60 @@ public class HomeFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                View dialogueView= LayoutInflater.from(getContext()).inflate(R.layout.dialogue_input_item,null);
+                View inputDialogueView = LayoutInflater.from(getContext()).inflate(R.layout.dialogue_input_item, null);
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
-                alertDialogBuilder.setView(dialogueView);
+                alertDialogBuilder.setView(inputDialogueView);
 
-                alertDialogBuilder.setPositiveButton("确定",new DialogInterface.OnClickListener(){
+                Button typeInput = inputDialogueView.findViewById(R.id.type_input);
+                EditText titleInput = inputDialogueView.findViewById(R.id.title_input);
+                EditText commentInput = inputDialogueView.findViewById(R.id.comment_input);
+                EditText amountInput = inputDialogueView.findViewById(R.id.amount_input);
+
+                final int[] type = new int[] {Transaction.Type.TYPE_INCOME};
+
+                // menu to select transaction type
+                typeInput.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//                                View selectTransactionTypeDialogueView = LayoutInflater.from(getContext()).inflate(R.layout.dialogue_select_transaction_type,null);
+                        AlertDialog.Builder selectTransactionTypeDialogueBuilder = new AlertDialog.Builder(view.getContext());
+                        selectTransactionTypeDialogueBuilder.setTitle("选择类型");
+//                                selectTransactionTypeDialogueBuilder.setView(selectTransactionTypeDialogueView);
+                        String[] availableTypes = new String[]{
+                                "Income",
+                                "Expense"
+                        };
+                        selectTransactionTypeDialogueBuilder.setItems(availableTypes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // The 'which' argument contains the index position
+                                // of the selected item
+                                typeInput.setText(availableTypes[which]);
+                            }
+                        });
+
+                        selectTransactionTypeDialogueBuilder.show();
+
+                    }
+                });
+
+                if (typeInput.getText().toString().equals("Income")) {
+                    type[0] = Transaction.Type.TYPE_INCOME;
+                } else if (typeInput.getText().toString().equals("Expense")) {
+                    type[0] = Transaction.Type.TYPE_EXPENSE;
+                }
+
+                alertDialogBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        EditText typeInput=dialogueView.findViewById(R.id.type_input);
-                        EditText titleInput=dialogueView.findViewById(R.id.title_input);
-                        EditText commentInput=dialogueView.findViewById(R.id.comment_input);
-                        EditText amountInput=dialogueView.findViewById(R.id.amount_input);
-
-                        int type;
-                        if (typeInput.getText().toString().equals("TYPE_INCOME")){
-                            type=Transaction.Type.TYPE_INCOME;
-                        }
-                        else if (typeInput.getText().toString().equals("TYPE_EXPENSE")){
-                            type=Transaction.Type.TYPE_EXPENSE;
-                        }
-                        else{
-                            type=Transaction.Type.TYPE_INCOME;
-                        }
-                        transactions.add(new Transaction(type,titleInput.getText().toString(),commentInput.getText().toString(),Double.valueOf(amountInput.getText().toString())));
+                        transactions.add(new Transaction(type[0], titleInput.getText().toString(), commentInput.getText().toString(), Double.valueOf(amountInput.getText().toString())));
                         adapter.notifyItemInserted(transactions.size());
 
                         // Give user feedback
-                        Toast.makeText(getContext(),"Transaction Added", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Transaction Added", Toast.LENGTH_LONG).show();
                         dataLoader.saveData();      // write to file
                     }
                 });
-                alertDialogBuilder.setCancelable(false).setNegativeButton ("取消",new DialogInterface.OnClickListener(){
+                alertDialogBuilder.setCancelable(false).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -133,7 +159,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void initdata() {
-        this.dataLoader = new DataLoader(getContext());
+        this.dataLoader = new DataLoader(rootView.getContext());
         this.transactions = dataLoader.loadData();
         if (transactions.size() == 0) {
             // fill some data if none is present.

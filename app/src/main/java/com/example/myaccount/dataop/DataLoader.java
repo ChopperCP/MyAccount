@@ -15,33 +15,42 @@ import com.example.myaccount.R;
 public class DataLoader {
     private final String DATA_FILE_NAME;
     private Context context = null;
-    List<Transaction> shopItemList;
+    List<Transaction> transactions;
 
     public DataLoader(Context context) {
-        this.context=context;
-        this.DATA_FILE_NAME=context.getResources().getString(R.string.DATA_FILE_NAME);
+        this.context = context;
+        this.DATA_FILE_NAME = context.getResources().getString(R.string.DATA_FILE_NAME);
     }
 
     public List<Transaction> loadData() {
-        shopItemList=new ArrayList<>();
+        transactions = new ArrayList<>();
+        ObjectInputStream objectInputStream = null;
         try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(context.openFileInput(DATA_FILE_NAME));
-            shopItemList = (ArrayList<Transaction>) objectInputStream.readObject();
-        }catch(Exception e)
-        {
+            objectInputStream = new ObjectInputStream(context.openFileInput(DATA_FILE_NAME));
+            transactions = (ArrayList<Transaction>) objectInputStream.readObject();
+            objectInputStream.close();
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (objectInputStream != null) {
+                    objectInputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        return shopItemList;
+        return transactions;
     }
 
     public void saveData() {
-        ObjectOutputStream objectOutputStream=null;
-        try{
+        ObjectOutputStream objectOutputStream = null;
+        try {
             objectOutputStream = new ObjectOutputStream(context.openFileOutput(DATA_FILE_NAME, Context.MODE_PRIVATE));
-            objectOutputStream.writeObject(shopItemList);
-        }catch(IOException e){
+            objectOutputStream.writeObject(transactions);
+        } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 if (objectOutputStream != null) {
                     objectOutputStream.close();

@@ -16,13 +16,15 @@
             android:layout_weight="1"
             android:text="Type" />
 
-        <EditText
+        <Button
             android:id="@+id/type_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:text="" />
+            android:gravity="center"
+            android:text="Select Type" />
+
     </LinearLayout>
 
     <LinearLayout
