@@ -4,6 +4,7 @@ package com.example.myaccount.models;
 import com.example.myaccount.R;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Transaction implements Serializable {
     private final int imageIdIcon;
@@ -11,23 +12,25 @@ public class Transaction implements Serializable {
     private String title;
     private String comment;
     private double amount;
+    private Date date;
 
     public Transaction(int type, String title, String comment, double amount) {
-        this.type=type;
+        this.type = type;
         this.title = title;
         this.comment = comment;
         this.amount = amount;
+        this.date = new Date();
 
 
-        switch (type){
+        switch (type) {
             case Type.TYPE_INCOME:
-                this.imageIdIcon=R.drawable.ic_income;
+                this.imageIdIcon = R.drawable.ic_income;
                 break;
             case Type.TYPE_EXPENSE:
-                this.imageIdIcon=R.drawable.ic_expense;
+                this.imageIdIcon = R.drawable.ic_expense;
                 break;
             default:
-                this.imageIdIcon=R.drawable.ic_income;
+                this.imageIdIcon = R.drawable.ic_income;
                 break;
         }
     }
@@ -64,8 +67,13 @@ public class Transaction implements Serializable {
         this.amount = amount;
     }
 
-    public static class Type{
-        public static final int TYPE_INCOME=1;
-        public static final int TYPE_EXPENSE =TYPE_INCOME+1;
+    public Date getDate() {
+        return date;
+    }
+
+    // transaction types
+    public static class Type {
+        public static final int TYPE_INCOME = 1;
+        public static final int TYPE_EXPENSE = TYPE_INCOME + 1;
     }
 }

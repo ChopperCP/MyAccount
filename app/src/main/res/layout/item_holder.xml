@@ -26,22 +26,28 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:orientation="vertical"
-                android:gravity="center"
-                >
+                android:gravity="center">
 
-            <TextView
-                android:id="@+id/textView_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Title" />
+                <TextView
+                    android:id="@+id/textView_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Title" />
 
-            <TextView
-                android:id="@+id/textView_comment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Comment" />
+                <TextView
+                    android:id="@+id/textView_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Comment" />
+
+                <TextView
+                    android:id="@+id/textView_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Date" />
 
             </LinearLayout>
 

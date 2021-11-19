@@ -196,7 +196,7 @@ class TransactionRecyclerViewAdapter extends RecyclerView.Adapter {
         transactionViewHolder.getTitleView().setText(transactions.get(position).getTitle());
         transactionViewHolder.getCommentView().setText(transactions.get(position).getComment());
         transactionViewHolder.getAmountView().setText(String.valueOf(transactions.get(position).getAmount()));
-
+        transactionViewHolder.getDateView().setText(transactions.get(position).getDate().toString());
     }
 
     @Override
@@ -210,6 +210,7 @@ class TransactionRecyclerViewAdapter extends RecyclerView.Adapter {
         private final TextView titleView;
         private final TextView commentView;
         private final TextView amountView;
+        private final TextView dateView;
 
         public View getItemView() {
             return itemView;
@@ -231,6 +232,10 @@ class TransactionRecyclerViewAdapter extends RecyclerView.Adapter {
             return amountView;
         }
 
+        public TextView getDateView() {
+            return dateView;
+        }
+
         public TransactionHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -239,6 +244,7 @@ class TransactionRecyclerViewAdapter extends RecyclerView.Adapter {
             this.titleView = itemView.findViewById(R.id.textView_title);
             this.commentView = itemView.findViewById(R.id.textView_comment);
             this.amountView = itemView.findViewById(R.id.textView_amount);
+            this.dateView=itemView.findViewById(R.id.textView_date);
         }
     }
 }
