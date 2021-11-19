@@ -4,7 +4,7 @@ package com.example.myaccount.models;
 import com.example.myaccount.R;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 
 public class Transaction implements Serializable {
     private final int imageIdIcon;
@@ -12,14 +12,37 @@ public class Transaction implements Serializable {
     private String title;
     private String comment;
     private double amount;
-    private Date date;
+    private Calendar date;
 
     public Transaction(int type, String title, String comment, double amount) {
         this.type = type;
         this.title = title;
         this.comment = comment;
         this.amount = amount;
-        this.date = new Date();
+        this.date = Calendar.getInstance();
+
+
+        switch (type) {
+            case Type.TYPE_INCOME:
+                this.imageIdIcon = R.drawable.ic_income;
+                break;
+            case Type.TYPE_EXPENSE:
+                this.imageIdIcon = R.drawable.ic_expense;
+                break;
+            default:
+                this.imageIdIcon = R.drawable.ic_income;
+                break;
+        }
+    }
+
+
+
+    public Transaction(int type, String title, String comment, double amount, Calendar date) {
+        this.type = type;
+        this.title = title;
+        this.comment = comment;
+        this.amount = amount;
+        this.date=date;
 
 
         switch (type) {
@@ -67,7 +90,7 @@ public class Transaction implements Serializable {
         this.amount = amount;
     }
 
-    public Date getDate() {
+    public Calendar getDate() {
         return date;
     }
 

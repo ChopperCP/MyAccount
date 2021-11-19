@@ -1,10 +1,7 @@
 package com.example.myaccount.ui.home;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +24,8 @@ import com.example.myaccount.dataop.DataLoader;
 import com.example.myaccount.models.Transaction;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -39,7 +36,7 @@ public class HomeFragment extends Fragment {
 
     private List<Transaction> transactions;
     private DataLoader dataLoader;
-    private TransactionRecyclerViewAdapter adapter;
+    private HomeRecyclerViewAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,7 +52,7 @@ public class HomeFragment extends Fragment {
         RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        this.adapter = new TransactionRecyclerViewAdapter(transactions);
+        this.adapter = new HomeRecyclerViewAdapter(transactions);
         recyclerView.setAdapter(adapter);
 
 //        Calculate the net asset, total income, and total expense
@@ -165,19 +162,20 @@ public class HomeFragment extends Fragment {
             // fill some data if none is present.
             transactions.add(new Transaction(Transaction.Type.TYPE_INCOME, "Salary", "Nov Salary", 20000));
             transactions.add(new Transaction(Transaction.Type.TYPE_EXPENSE, "Rent", "Nov Rent", 5000));
+            Calendar aMonthAgo = Calendar.getInstance();
+            aMonthAgo.add(Calendar.MONTH,-1);
+            transactions.add(new Transaction(Transaction.Type.TYPE_INCOME, "Salary", "Oct Salary", 20000, aMonthAgo));
         }
     }
 
 }
 
-class TransactionRecyclerViewAdapter extends RecyclerView.Adapter {
+class HomeRecyclerViewAdapter extends RecyclerView.Adapter {
     private final List<Transaction> transactions;
     private TransactionHolder transactionViewHolder;
 
-    public TransactionRecyclerViewAdapter(List<Transaction> transactions) {
+    public HomeRecyclerViewAdapter(List<Transaction> transactions) {
         this.transactions = transactions;
-
-
     }
 
     @NonNull
@@ -196,7 +194,7 @@ class TransactionRecyclerViewAdapter extends RecyclerView.Adapter {
         transactionViewHolder.getTitleView().setText(transactions.get(position).getTitle());
         transactionViewHolder.getCommentView().setText(transactions.get(position).getComment());
         transactionViewHolder.getAmountView().setText(String.valueOf(transactions.get(position).getAmount()));
-        transactionViewHolder.getDateView().setText(transactions.get(position).getDate().toString());
+        transactionViewHolder.getDateView().setText(transactions.get(position).getDate().getTime().toString());
     }
 
     @Override

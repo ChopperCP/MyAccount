@@ -3,10 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.38229166666666664" />
+        <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.38229166666666664" />
+        <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/drawable/side_nav_bar.xml" value="0.38229166666666664" />
+        <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/analyze_holder.xml" value="0.36614583333333334" />
+        <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/content_main.xml" value="0.36614583333333334" />
         <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/dialogue_input_item.xml" value="0.2640625" />
         <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/dialogue_select_transaction_type.xml" value="0.2640625" />
+        <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/fragment_analyze.xml" value="0.36614583333333334" />
+        <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/fragment_gallery.xml" value="0.36614583333333334" />
         <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/fragment_home.xml" value="0.2640625" />
         <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/item_holder.xml" value="0.36614583333333334" />
+        <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/nav_header_main.xml" value="0.36614583333333334" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/drawable-v24/ic_launcher_background.xml" value="0.14583333333333334" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/drawable/ic_expense.xml" value="0.2" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/drawable/ic_income.xml" value="0.14583333333333334" />
