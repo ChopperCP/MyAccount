@@ -165,6 +165,8 @@ public class HomeFragment extends Fragment {
             Calendar aMonthAgo = Calendar.getInstance();
             aMonthAgo.add(Calendar.MONTH,-1);
             transactions.add(new Transaction(Transaction.Type.TYPE_INCOME, "Salary", "Oct Salary", 20000, aMonthAgo));
+
+            dataLoader.saveData();
         }
     }
 
