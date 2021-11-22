@@ -22,6 +22,7 @@ import com.example.myaccount.R;
 import com.example.myaccount.databinding.FragmentHomeBinding;
 import com.example.myaccount.dataop.DataLoader;
 import com.example.myaccount.models.Transaction;
+import com.example.myaccount.tools.Tools;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
@@ -45,7 +46,7 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        this.rootView=root;
+        this.rootView = root;
 
 
         initdata();
@@ -90,20 +91,20 @@ public class HomeFragment extends Fragment {
                 EditText commentInput = inputDialogueView.findViewById(R.id.comment_input);
                 EditText amountInput = inputDialogueView.findViewById(R.id.amount_input);
 
-                final int[] type = new int[] {Transaction.Type.TYPE_INCOME};
+                final int[] type = new int[]{Transaction.Type.TYPE_INCOME};
 
                 // menu to select transaction type
                 typeInput.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                                View selectTransactionTypeDialogueView = LayoutInflater.from(getContext()).inflate(R.layout.dialogue_select_transaction_type,null);
                         AlertDialog.Builder selectTransactionTypeDialogueBuilder = new AlertDialog.Builder(view.getContext());
-                        selectTransactionTypeDialogueBuilder.setTitle("选择类型");
-//                                selectTransactionTypeDialogueBuilder.setView(selectTransactionTypeDialogueView);
+                        selectTransactionTypeDialogueBuilder.setTitle("Select Transaction Type");
+
                         String[] availableTypes = new String[]{
                                 "Income",
                                 "Expense"
                         };
+
                         selectTransactionTypeDialogueBuilder.setItems(availableTypes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // The 'which' argument contains the index position
@@ -123,10 +124,36 @@ public class HomeFragment extends Fragment {
                     type[0] = Transaction.Type.TYPE_EXPENSE;
                 }
 
-                alertDialogBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        transactions.add(new Transaction(type[0], titleInput.getText().toString(), commentInput.getText().toString(), Double.valueOf(amountInput.getText().toString())));
+                        String title = titleInput.getText().toString();
+                        String comment = commentInput.getText().toString();
+
+                        if (title.length() == 0) {
+                            Toast.makeText(getContext(), "Empty Title!", Toast.LENGTH_SHORT).show();
+                            dialogInterface.dismiss();
+                            return;
+                        }
+                        if (comment.length() == 0) {
+                            Toast.makeText(getContext(), "Empty Comment!", Toast.LENGTH_SHORT).show();
+                            dialogInterface.dismiss();
+                            return;
+                        }
+                        if (amountInput.getText().toString().length() == 0) {
+                            Toast.makeText(getContext(), "Empty Amount!", Toast.LENGTH_SHORT).show();
+                            dialogInterface.dismiss();
+                            return;
+                        }
+                        if (!Tools.isNumeric(amountInput.getText().toString())) {
+                            Toast.makeText(getContext(), "Amount is not a valid number!", Toast.LENGTH_SHORT).show();
+                            dialogInterface.dismiss();
+                            return;
+                        }
+
+                        Double amount = Double.parseDouble(amountInput.getText().toString());
+
+                        transactions.add(new Transaction(type[0], title, comment, amount));
                         adapter.notifyItemInserted(transactions.size());
 
                         // Give user feedback
@@ -134,7 +161,7 @@ public class HomeFragment extends Fragment {
                         dataLoader.saveData();      // write to file
                     }
                 });
-                alertDialogBuilder.setCancelable(false).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setCancelable(false).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -163,7 +190,7 @@ public class HomeFragment extends Fragment {
             transactions.add(new Transaction(Transaction.Type.TYPE_INCOME, "Salary", "Nov Salary", 20000));
             transactions.add(new Transaction(Transaction.Type.TYPE_EXPENSE, "Rent", "Nov Rent", 5000));
             Calendar aMonthAgo = Calendar.getInstance();
-            aMonthAgo.add(Calendar.MONTH,-1);
+            aMonthAgo.add(Calendar.MONTH, -1);
             transactions.add(new Transaction(Transaction.Type.TYPE_INCOME, "Salary", "Oct Salary", 20000, aMonthAgo));
 
             dataLoader.saveData();
@@ -244,7 +271,7 @@ class HomeRecyclerViewAdapter extends RecyclerView.Adapter {
             this.titleView = itemView.findViewById(R.id.textView_title);
             this.commentView = itemView.findViewById(R.id.textView_comment);
             this.amountView = itemView.findViewById(R.id.textView_amount);
-            this.dateView=itemView.findViewById(R.id.textView_date);
+            this.dateView = itemView.findViewById(R.id.textView_date);
         }
     }
 }

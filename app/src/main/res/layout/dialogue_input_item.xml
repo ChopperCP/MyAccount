@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:gravity="center"
-            android:text="Select Type" />
+            android:text="Income" />
 
     </LinearLayout>
 
