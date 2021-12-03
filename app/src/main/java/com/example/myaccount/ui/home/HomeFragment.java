@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
         RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        this.adapter = new HomeRecyclerViewAdapter(transactions, adapter);
+        this.adapter = new HomeRecyclerViewAdapter(transactions, dataLoader,adapter);
         recyclerView.setAdapter(adapter);
 
 //       Calculate the net asset, total income, and total expense
@@ -210,10 +210,12 @@ public class HomeFragment extends Fragment {
 
 class HomeRecyclerViewAdapter extends RecyclerView.Adapter {
     private final List<Transaction> transactions;
+    private final DataLoader dataLoader;
     private TransactionHolder transactionViewHolder;
 
-    public HomeRecyclerViewAdapter(List<Transaction> transactions, RecyclerView.Adapter adapter) {
+    public HomeRecyclerViewAdapter(List<Transaction> transactions, DataLoader dataLoader, RecyclerView.Adapter adapter) {
         this.transactions = transactions;
+        this.dataLoader=dataLoader;
     }
 
     @NonNull
@@ -249,7 +251,6 @@ class HomeRecyclerViewAdapter extends RecyclerView.Adapter {
         private final TextView dateView;
 
 
-        private final DataLoader dataLoader;
         private final HomeRecyclerViewAdapter adapter;
 
         public static final int ID_TRANSACTION_COPY = 1;
@@ -290,7 +291,6 @@ class HomeRecyclerViewAdapter extends RecyclerView.Adapter {
             this.amountView = itemView.findViewById(R.id.textView_amount);
             this.dateView = itemView.findViewById(R.id.textView_date);
 
-            this.dataLoader = new DataLoader(itemView.getContext());
             this.adapter = adapter;
             itemView.setOnCreateContextMenuListener(this);
         }
