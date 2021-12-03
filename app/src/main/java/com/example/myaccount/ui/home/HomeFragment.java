@@ -1,6 +1,7 @@
 package com.example.myaccount.ui.home;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -212,6 +213,7 @@ class HomeRecyclerViewAdapter extends RecyclerView.Adapter {
     private final List<Transaction> transactions;
     private final DataLoader dataLoader;
     private TransactionHolder transactionViewHolder;
+    private Context parentContext;
 
     public HomeRecyclerViewAdapter(List<Transaction> transactions, DataLoader dataLoader, RecyclerView.Adapter adapter) {
         this.transactions = transactions;
@@ -222,6 +224,7 @@ class HomeRecyclerViewAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_holder, parent, false);
+        this.parentContext=parent.getContext();
 
         return new TransactionHolder(view, this);
     }
@@ -230,11 +233,22 @@ class HomeRecyclerViewAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         this.transactionViewHolder = (TransactionHolder) holder;
 
-        transactionViewHolder.getImageView().setImageResource(transactions.get(position).getImageIdIcon());
-        transactionViewHolder.getTitleView().setText(transactions.get(position).getTitle());
-        transactionViewHolder.getCommentView().setText(transactions.get(position).getComment());
-        transactionViewHolder.getAmountView().setText(String.valueOf(transactions.get(position).getAmount()));
-        transactionViewHolder.getDateView().setText(transactions.get(position).getDate().getTime().toString());
+        Transaction targetTransaction=transactions.get(position);
+        transactionViewHolder.getImageView().setImageResource(targetTransaction.getImageIdIcon());
+        transactionViewHolder.getTitleView().setText(targetTransaction.getTitle());
+        transactionViewHolder.getCommentView().setText(targetTransaction.getComment());
+        transactionViewHolder.getAmountView().setText(String.valueOf(targetTransaction.getAmount()));
+        transactionViewHolder.getDateView().setText(targetTransaction.getDate().getTime().toString());
+
+        switch (targetTransaction.getType()){
+            case Transaction.Type.TYPE_INCOME:
+                transactionViewHolder.getAmountView().setTextColor(parentContext.getColor(R.color.green_light));
+                break;
+            case Transaction.Type.TYPE_EXPENSE:
+                transactionViewHolder.getAmountView().setTextColor(parentContext.getColor(R.color.red_light));
+                break;
+
+        }
     }
 
     @Override
@@ -294,6 +308,7 @@ class HomeRecyclerViewAdapter extends RecyclerView.Adapter {
             this.adapter = adapter;
             itemView.setOnCreateContextMenuListener(this);
         }
+
 
         @Override
         public boolean onMenuItemClick(MenuItem item) {
