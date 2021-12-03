@@ -36,6 +36,9 @@ public class DataLoader {
                 if (objectInputStream != null) {
                     objectInputStream.close();
                 }
+                if (transactions==null || transactions.size()==0){
+                    transactions=new ArrayList<>();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
