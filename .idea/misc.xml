@@ -3,13 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/drawable/border.xml" value="0.284375" />
         <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.38229166666666664" />
         <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.38229166666666664" />
         <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/drawable/side_nav_bar.xml" value="0.38229166666666664" />
         <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
         <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/analyze_holder.xml" value="0.36614583333333334" />
-        <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/app_bar_main.xml" value="0.36614583333333334" />
         <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/content_main.xml" value="0.36614583333333334" />
         <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/dialogue_input_item.xml" value="0.2640625" />
         <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/dialogue_select_transaction_type.xml" value="0.2640625" />
@@ -18,21 +16,27 @@
         <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/fragment_home.xml" value="0.2640625" />
         <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/item_holder.xml" value="0.36614583333333334" />
         <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/layout/nav_header_main.xml" value="0.36614583333333334" />
-        <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/menu/activity_main_drawer.xml" value="0.36614583333333334" />
-        <entry key="..\:/cool stuff/Code/MyAccount/app/src/main/res/menu/main.xml" value="0.36614583333333334" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/drawable-v24/ic_launcher_background.xml" value="0.14583333333333334" />
+        <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14583333333333334" />
+        <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/drawable/border.xml" value="0.26979166666666665" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/drawable/ic_expense.xml" value="0.2" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/drawable/ic_income.xml" value="0.14583333333333334" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/drawable/ic_income_background.xml" value="0.26979166666666665" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/drawable/ic_income_foreground.xml" value="0.26979166666666665" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/layout/activity_input.xml" value="0.1671195652173913" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/layout/activity_main.xml" value="0.22735507246376813" />
+        <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/layout/analyze_holder.xml" value="0.4" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/layout/app_bar_main.xml" value="0.1671195652173913" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/layout/content_main.xml" value="0.14945652173913043" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/layout/dialogue_input_item.xml" value="0.264" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/layout/fragment_gallery.xml" value="0.25364583333333335" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/layout/fragment_home.xml" value="0.25364583333333335" />
+        <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/layout/fragment_sortview.xml" value="0.25364583333333335" />
+        <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/layout/fragment_typesort.xml" value="0.25364583333333335" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/layout/item_holder.xml" value="0.25364583333333335" />
+        <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/layout/nav_header_main.xml" value="0.144" />
+        <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/layout/sortview_tab.xml" value="0.25364583333333335" />
+        <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/mipmap-anydpi-v26/ic_avatar.xml" value="0.13854166666666667" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/mipmap-anydpi-v26/ic_income.xml" value="0.14583333333333334" />
         <entry key="..\:/cool stuff/Temp Code/MyAccount/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14583333333333334" />
       </map>

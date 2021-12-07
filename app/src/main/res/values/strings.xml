@@ -10,6 +10,6 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_analyze">Analyze</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_sortview">Transaction Type Sort</string>
     <string name="DATA_FILE_NAME">data</string>
 </resources>

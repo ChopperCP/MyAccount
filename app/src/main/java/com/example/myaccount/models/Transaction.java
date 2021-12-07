@@ -6,7 +6,7 @@ import com.example.myaccount.R;
 import java.io.Serializable;
 import java.util.Calendar;
 
-public class Transaction implements Serializable {
+public class Transaction implements Serializable,Comparable {
     private final int imageIdIcon;
     private final int type;
     private String title;
@@ -94,9 +94,22 @@ public class Transaction implements Serializable {
         return date;
     }
 
+    @Override
+    public int compareTo(Object o) {
+        Transaction anotherTransaction=(Transaction) o;
+        return this.getDate().compareTo(anotherTransaction.getDate());
+    }
+
     // transaction types
     public static class Type {
         public static final int TYPE_INCOME = 1;
         public static final int TYPE_EXPENSE = TYPE_INCOME + 1;
+
+        public static String getTypeIncomeText(){
+            return "Income";
+        }
+        public static String getTypeExpenseText(){
+            return "Expense";
+        }
     }
 }
